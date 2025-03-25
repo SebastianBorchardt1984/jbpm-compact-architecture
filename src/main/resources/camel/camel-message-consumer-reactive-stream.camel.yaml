@@ -1,0 +1,50 @@
+- route:
+    id: transform-json-route
+    from:
+      uri: reactive-streams
+      parameters:
+        stream: an-camel
+      steps:
+        - log:
+            loggingLevel: INFO
+            message: ">>> raw body: ${body}"
+        - process:
+            ref: cloudEventToJsonProcessor
+        - log:
+            loggingLevel: INFO
+            message: ">>> after processor: ${body}"
+        - unmarshal:
+            json:
+              library: Jackson
+        - setHeader:
+            id: setHeader-1995
+            expression:
+              simple:
+                expression: application/cloudevents+json
+            name: Content-Type
+        - setBody:
+            simple: |
+              {
+                "specversion": "1.0",
+                "id": "${exchangeId}",
+                "source": "/process/camel_reactive_example2",
+                "type": "von-camel",
+                "time": "${date:now:yyyy-MM-dd'T'HH:mm:ss'Z'}",
+                "kogitoprocrefid": "${body[kogitoprocinstanceid]}",
+                "data": "Neuer Inhalt"
+              }
+        - log:
+            loggingLevel: INFO
+            message: ">>> new payload as JSON string: ${body}"
+        - delay:
+            id: delay-3606
+            description: Warten
+            expression:
+              simple:
+                expression: "1000"
+        - to:
+            id: to-3815
+            description: von-camel
+            uri: reactive-streams
+            parameters:
+              stream: von-camel

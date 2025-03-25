@@ -1,0 +1,71 @@
+- route:
+    id: hana-query-rest
+    description: Daten Holen über REST
+    from:
+      id: from-bb88
+      uri: rest
+      parameters:
+        method: get
+        path: ":"
+        uriTemplate: /api/hana-query
+      steps:
+        - multicast:
+            id: multicast-01f1
+            steps:
+              - step:
+                  id: step-8ff3
+                  steps:
+                    - setBody:
+                        id: setBody-9452
+                        description: Set SQL
+                        expression:
+                          groovy:
+                            id: groovy-2bff
+                    - to:
+                        id: to-ab65
+                        uri: jdbc
+                    - marshal:
+                        id: marshal-2293
+                        json:
+                          id: json-6cea
+                    - log:
+                        id: log-f60c
+                        message: ${body}
+              - step:
+                  id: step-6d1c
+                  steps:
+                    - setBody:
+                        id: setBody-6a1a
+                        description: Set SQL
+                        expression:
+                          groovy:
+                            id: groovy-8792
+                    - to:
+                        id: to-0b05
+                        uri: jdbc
+                    - marshal:
+                        id: marshal-7bcb
+                        json:
+                          id: json-e1c5
+                    - log:
+                        id: log-e271
+                        message: ${body}
+              - step:
+                  id: step-297f
+                  steps:
+                    - setBody:
+                        id: setBody-3976
+                        description: Set SQL
+                        expression:
+                          groovy:
+                            id: groovy-183c
+                    - to:
+                        id: to-d3a9
+                        uri: jdbc
+                    - marshal:
+                        id: marshal-30a1
+                        json:
+                          id: json-187e
+                    - log:
+                        id: log-17c8
+                        message: ${body}

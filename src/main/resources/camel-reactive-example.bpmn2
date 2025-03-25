@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="xsi" id="_WCsN4OrKED2sD8bf79W6HQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_nameItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_candidateDataItem" structureRef="org.kie.kogito.hr.CandidateData"/>
+  <bpmn2:itemDefinition id="__C5A36867-7DD4-464C-B8FC-B84BB754674B_eventInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="an-camelType" structureRef="String"/>
+  <bpmn2:itemDefinition id="__65C00B2C-CD83-454E-92C6-E60409DB72F7_eventOutputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="von-camelType" structureRef="String"/>
+  <bpmn2:itemDefinition id="_ABA88937-F5E2-49A3-9A47-44FE62D25478" structureRef=""/>
+  <bpmn2:itemDefinition id="_92BD9965-1238-4939-ADD3-F0A83FC2027D" structureRef=""/>
+  <bpmn2:message id="_WCs08OrKED2sD8bf79W6HQ" itemRef="an-camelType" name="an-camel"/>
+  <bpmn2:message id="_WCs08erKED2sD8bf79W6HQ" itemRef="von-camelType" name="von-camel"/>
+  <bpmn2:collaboration id="_9C923AB4-D481-40B1-94B3-CB5750492D47" name="Default Collaboration">
+    <bpmn2:participant id="_DFF0EE28-CD4D-4BD9-9620-19BED7CB1950" name="Pool Participant" processRef="camel_reactive_example"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="camel_reactive_example" drools:packageName="com.example" drools:version="1.0" drools:adHoc="false" name="camel-reactive-example" isExecutable="true" processType="Public">
+    <bpmn2:property id="name" itemSubjectRef="_nameItem" name="name"/>
+    <bpmn2:property id="candidateData" itemSubjectRef="_candidateDataItem" name="candidateData"/>
+    <bpmn2:sequenceFlow id="_29983AE0-6154-4771-82A4-8003AC8B7BE8" sourceRef="_65C00B2C-CD83-454E-92C6-E60409DB72F7" targetRef="_F2DF3BB4-DD49-4393-9472-262A812CF014"/>
+    <bpmn2:sequenceFlow id="_2BAB76AF-4207-41A5-B731-395A18CB13F3" sourceRef="_C5A36867-7DD4-464C-B8FC-B84BB754674B" targetRef="_65C00B2C-CD83-454E-92C6-E60409DB72F7"/>
+    <bpmn2:sequenceFlow id="_6562A4BF-0F1E-4DBA-B20D-5C7FBBFB3E57" sourceRef="_16710E54-DF88-4F82-B212-9863E6FFCB04" targetRef="_C5A36867-7DD4-464C-B8FC-B84BB754674B"/>
+    <bpmn2:endEvent id="_F2DF3BB4-DD49-4393-9472-262A812CF014" name="Ende">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Ende]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_29983AE0-6154-4771-82A4-8003AC8B7BE8</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:intermediateCatchEvent id="_65C00B2C-CD83-454E-92C6-E60409DB72F7" name="von Camel">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[von Camel]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_2BAB76AF-4207-41A5-B731-395A18CB13F3</bpmn2:incoming>
+      <bpmn2:outgoing>_29983AE0-6154-4771-82A4-8003AC8B7BE8</bpmn2:outgoing>
+      <bpmn2:dataOutput id="_65C00B2C-CD83-454E-92C6-E60409DB72F7_eventOutputX" drools:dtype="String" itemSubjectRef="__65C00B2C-CD83-454E-92C6-E60409DB72F7_eventOutputXItem" name="event"/>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_65C00B2C-CD83-454E-92C6-E60409DB72F7_eventOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet>
+        <bpmn2:dataOutputRefs>_65C00B2C-CD83-454E-92C6-E60409DB72F7_eventOutputX</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:messageEventDefinition drools:msgref="von-camel" messageRef="_WCs08erKED2sD8bf79W6HQ"/>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:intermediateThrowEvent id="_C5A36867-7DD4-464C-B8FC-B84BB754674B" name="An Camel">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[An Camel]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_6562A4BF-0F1E-4DBA-B20D-5C7FBBFB3E57</bpmn2:incoming>
+      <bpmn2:outgoing>_2BAB76AF-4207-41A5-B731-395A18CB13F3</bpmn2:outgoing>
+      <bpmn2:dataInput id="_C5A36867-7DD4-464C-B8FC-B84BB754674B_eventInputX" drools:dtype="String" itemSubjectRef="__C5A36867-7DD4-464C-B8FC-B84BB754674B_eventInputXItem" name="event"/>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_C5A36867-7DD4-464C-B8FC-B84BB754674B_eventInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:inputSet>
+        <bpmn2:dataInputRefs>_C5A36867-7DD4-464C-B8FC-B84BB754674B_eventInputX</bpmn2:dataInputRefs>
+      </bpmn2:inputSet>
+      <bpmn2:messageEventDefinition drools:msgref="an-camel" messageRef="_WCs08OrKED2sD8bf79W6HQ"/>
+    </bpmn2:intermediateThrowEvent>
+    <bpmn2:startEvent id="_16710E54-DF88-4F82-B212-9863E6FFCB04" name="Start">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Start]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>_6562A4BF-0F1E-4DBA-B20D-5C7FBBFB3E57</bpmn2:outgoing>
+    </bpmn2:startEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="camel_reactive_example">
+      <bpmndi:BPMNShape id="shape__16710E54-DF88-4F82-B212-9863E6FFCB04" bpmnElement="_16710E54-DF88-4F82-B212-9863E6FFCB04">
+        <dc:Bounds height="56" width="56" x="377" y="472"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__C5A36867-7DD4-464C-B8FC-B84BB754674B" bpmnElement="_C5A36867-7DD4-464C-B8FC-B84BB754674B">
+        <dc:Bounds height="56" width="56" x="513" y="472"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__65C00B2C-CD83-454E-92C6-E60409DB72F7" bpmnElement="_65C00B2C-CD83-454E-92C6-E60409DB72F7">
+        <dc:Bounds height="56" width="56" x="649" y="472"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__F2DF3BB4-DD49-4393-9472-262A812CF014" bpmnElement="_F2DF3BB4-DD49-4393-9472-262A812CF014">
+        <dc:Bounds height="56" width="56" x="785" y="472"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__16710E54-DF88-4F82-B212-9863E6FFCB04_to_shape__C5A36867-7DD4-464C-B8FC-B84BB754674B" bpmnElement="_6562A4BF-0F1E-4DBA-B20D-5C7FBBFB3E57">
+        <di:waypoint x="405" y="500"/>
+        <di:waypoint x="541" y="500"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__C5A36867-7DD4-464C-B8FC-B84BB754674B_to_shape__65C00B2C-CD83-454E-92C6-E60409DB72F7" bpmnElement="_2BAB76AF-4207-41A5-B731-395A18CB13F3">
+        <di:waypoint x="541" y="500"/>
+        <di:waypoint x="677" y="500"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__65C00B2C-CD83-454E-92C6-E60409DB72F7_to_shape__F2DF3BB4-DD49-4393-9472-262A812CF014" bpmnElement="_29983AE0-6154-4771-82A4-8003AC8B7BE8">
+        <di:waypoint x="677" y="500"/>
+        <di:waypoint x="813" y="500"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="_16710E54-DF88-4F82-B212-9863E6FFCB04">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_WCsN4OrKED2sD8bf79W6HQ</bpmn2:source>
+    <bpmn2:target>_WCsN4OrKED2sD8bf79W6HQ</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>

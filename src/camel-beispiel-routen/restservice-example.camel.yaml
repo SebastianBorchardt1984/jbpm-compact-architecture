@@ -1,0 +1,64 @@
+- route:
+    id: call-scripts-camel
+    description: Send POST request to scripts_camel
+    from:
+      id: from-adee
+      uri: rest
+      parameters:
+        uriTemplate: /api/call-scripts-camel
+        method: post
+        path: ":"
+      steps:
+        - setHeader:
+            id: setHeader-fbb2
+            name: Content-Type
+            expression:
+              constant:
+                id: constant-8e9e
+                expression: application/json
+        - setBody:
+            id: setBody-647b
+            expression:
+              simple:
+                id: simple-1892
+                expression: "{\"name\": \"${header.name}\", \"message\": \"${header.message}\"}"
+        - to:
+            id: to-38bc
+            uri: http
+            parameters:
+              httpMethod: POST
+              httpUri: localhost:8080/scripts_camel
+        - log:
+            id: log-1005
+            message: "Response from scripts_camel: ${body}"
+- route:
+    id: log-rest-response
+    description: Call REST Service every 10 seconds and log response
+    from:
+      id: from-df3a
+      uri: timer
+      parameters:
+        timerName: RestWebServiceTimer?period=10000
+      steps:
+        - setHeader:
+            id: setHeader-b7ab
+            name: Content-Type
+            expression:
+              constant:
+                id: constant-568e
+                expression: application/json
+        - setBody:
+            id: setBody-d3b2
+            expression:
+              constant:
+                id: constant-e3b1
+                expression: "{\"name\": \"string\", \"message\": \"string\"}"
+        - to:
+            id: to-cb84
+            uri: http
+            parameters:
+              httpMethod: POST
+              httpUri: localhost:8080/scripts_camel
+        - log:
+            id: log-eb85
+            message: "REST API Response: ${body}"

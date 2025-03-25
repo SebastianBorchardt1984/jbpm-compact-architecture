@@ -1,0 +1,55 @@
+- route:
+    id: merge-variables-route
+    from:
+      id: from-test
+      uri: rest
+      parameters:
+        consumes: application/json
+        method: post
+        path: /api/mergeVariable
+      steps:
+        - unmarshal:
+            id: unmarshal-json1
+            json:
+              id: json-a202
+              library: Jackson
+        - setProperty:
+            id: propName
+            name: userName
+            expression:
+              simple:
+                id: simple-e00e
+                expression: ${body[name]}
+        - setProperty:
+            id: propAge
+            name: userAge
+            expression:
+              simple:
+                id: simple-ab7d
+                expression: ${body[age]}
+        - setProperty:
+            id: propCity
+            name: userCity
+            expression:
+              simple:
+                id: simple-a9a1
+                expression: ${body[city]}
+        - setBody:
+            id: set-body-merged-json
+            expression:
+              simple:
+                id: simple-1684
+                expression: |
+                  {
+                      "name": "${exchangeProperty.userName}",
+                      "age": "${exchangeProperty.userAge}",
+                      "city": "${exchangeProperty.userCity}"
+                  }
+        - marshal:
+            id: marshal-merged-to-json2
+            json:
+              id: json-8a7c
+              library: Jackson
+        - log:
+            id: log-final-json
+            message: "Merged JSON: ${body}"

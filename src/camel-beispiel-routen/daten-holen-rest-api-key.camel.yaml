@@ -1,0 +1,54 @@
+- route:
+    id: hana-query-rest
+    description: Daten Holen über REST mit API Key Authentifizierung
+    from:
+      id: from-17b0
+      uri: rest
+      parameters:
+        method: get
+        path: ":"
+        uriTemplate: /api/hana-query
+      steps:
+        - choice:
+            id: choice-eace
+            when:
+              - id: when-aedb
+                expression:
+                  simple:
+                    id: simple-3ade
+                    expression: ${header.X-Api-Key} == '{{api.key}}'
+                steps:
+                  - setBody:
+                      id: setBody-9c59
+                      expression:
+                        simple:
+                          id: simple-cd16
+                          expression: SELECT * FROM SYSTEM.BUT000
+                  - to:
+                      id: to-fbc0
+                      uri: jdbc
+                      parameters:
+                        dataSourceName: crm
+                  - marshal:
+                      id: marshal-4c99
+                      json:
+                        id: json-6ad2
+                  - log:
+                      id: log-68a1
+                      message: "Final Response: ${body}"
+            otherwise:
+              id: otherwise-dd29
+              steps:
+                - setHeader:
+                    id: setHeader-adea
+                    name: CamelHttpResponseCode
+                    expression:
+                      constant:
+                        id: constant-c544
+                        expression: "401"
+                - setBody:
+                    id: setBody-1a72
+                    expression:
+                      constant:
+                        id: constant-4408
+                        expression: "{\"error\": \"Unauthorized\"}"

@@ -1,0 +1,21 @@
+- route:
+    id: transform-json-route
+    from:
+      uri: reactive-streams
+      parameters:
+        stream: an-camel              # Hier kommt das CloudEvent an
+      steps:
+      - log:
+          message: ">>> raw body: ${body}"
+      # (1) CloudEvent -> reines JSON (über den Processor)
+      - process:
+          ref: "cloudEventToJsonProcessor"
+
+      # (2) Unmarshal zu einer Map (nun liegt im Body ein JSON-String)
+      - unmarshal:
+          json:
+            library: Jackson
+
+      # (3) Log das Ergebnis zur Kontrolle
+      - log:
+          message: ">>> Transformed body: ${body}"

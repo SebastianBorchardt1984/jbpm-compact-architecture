@@ -1,0 +1,37 @@
+- route:
+    id: hana-query-timer
+    description: Daten Holen
+    from:
+      id: from-a9cb
+      uri: timer
+      parameters:
+        period: "{{timer.period}}"
+        timerName: hanaTimer
+      steps:
+        - setBody:
+            id: setBody-b4be
+            description: Set Body bzw. Set SQL
+            expression:
+              simple:
+                id: simple-413d
+                expression: SELECT * FROM "SYSTEM"."BUT000"
+        - to:
+            id: to-729f
+            description: Hana JDBC
+            uri: jdbc
+            parameters:
+              dataSourceName: crm
+        - split:
+            id: split-c100
+            expression:
+              simple:
+                id: simple-5ecf
+                expression: ${body}
+            steps:
+              - marshal:
+                  id: marshal-cf85
+                  json:
+                    id: json-3bc0
+              - log:
+                  id: log-65f8
+                  message: "Fetched Record: ${body}"

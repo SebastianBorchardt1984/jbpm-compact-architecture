@@ -1,0 +1,11 @@
+- route:
+    id: route-f8b9
+    from:
+      id: from-66cd
+      uri: direct
+      parameters:
+        name: startCamelRoute
+      steps:
+        - log:
+            id: log-f781
+            message: "Nachricht empfangen: ${body}"

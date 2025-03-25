@@ -42,6 +42,13 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-camel-bom</artifactId>
+        <version>3.8.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
         <version>3.8.4</version>
@@ -78,12 +85,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
-    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
@@ -96,12 +98,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-with-drools-quarkus</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-addons-quarkus-process-management</artifactId>
@@ -119,7 +119,7 @@
       <artifactId>kie-addons-quarkus-source-files</artifactId>
     </dependency>
 
-    <!-- Persistence -->
+ <!-- Persistence -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
@@ -164,16 +164,145 @@
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit</artifactId>
     </dependency>
+<!-- Messaging -->   
+  <dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
+  </dependency>
+
+  <!-- Das "Camel"-Connector Modul für SmallRye: -->
+  <dependency>
+    <groupId>io.smallrye.reactive</groupId>
+    <artifactId>smallrye-reactive-messaging-camel</artifactId>
+  </dependency>
+
+  <!-- Camel Quarkus Reactive Streams (oder 'direct', 'timer', etc.) -->
+  <!-- Kogito Messaging Addon (falls nötig) -->
+  <dependency>
+    <groupId>org.kie</groupId>
+    <artifactId>kie-addons-quarkus-messaging</artifactId>
+  </dependency>
+<!-- Kogito APIs -->  
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api</artifactId>
     </dependency>
-   
     <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-addons-quarkus-messaging</artifactId>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api-incubation-application</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api-incubation-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api-incubation-processes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>kogito-api-incubation-processes-services</artifactId>
+    </dependency>
+
+ <!-- Core Camel Quarkus Dependencies -->
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-stream</artifactId>       
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-bean</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-yaml-dsl</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-direct</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-timer</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-http</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-rest</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-rest-openapi</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-jdbc</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-jackson</artifactId>
+    </dependency>
+        <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-reactive-streams</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-smallrye-reactive-messaging</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-cloudevents</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel.quarkus</groupId>
+        <artifactId>camel-quarkus-sap</artifactId>
+        <version>3.8.0.redhat-00018</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-kamelet</artifactId>
+    </dependency>
+    <!-- SAP HANA ngdbc Treiber -->
+    <dependency>
+      <groupId>com.sap.cloud.db.jdbc</groupId>
+      <artifactId>ngdbc</artifactId>
+      <version>2.23.10</version>
+      <type>jar</type>
     </dependency>
 </dependencies>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>redhat</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>redhat</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+        </pluginRepository>
+    </pluginRepositories>
   <profiles>
     <profile>
       <id>container</id>

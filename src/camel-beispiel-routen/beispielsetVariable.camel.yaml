@@ -1,0 +1,40 @@
+- route:
+    id: Variable
+    description: Beispiel Set Variable
+    from:
+      id: from-test
+      uri: rest
+      parameters:
+        consumes: application/json
+        method: post
+        path: /api/setVariable
+      steps:
+        - log:
+            id: log-incoming-body
+            message: Empfangener Body (raw) = ${body}
+        - unmarshal:
+            id: unmarshal-json
+            json:
+              id: json-a78c
+              library: Jackson
+        - setProperty:
+            id: set-property-userName
+            expression:
+              simple:
+                id: simple-113b
+                expression: ${body[name]}
+            name: userName
+        - log:
+            id: log-userName
+            message: "Der Name lautet: ${exchangeProperty.userName}"
+        - setBody:
+            id: set-body-response
+            expression:
+              simple:
+                id: simple-6f6f
+                expression: '{"ack": "Nachricht empfangen von ${exchangeProperty.userName}"}'
+        - marshal:
+            id: marshal-json
+            json:
+              id: json-7686
+              library: Jackson

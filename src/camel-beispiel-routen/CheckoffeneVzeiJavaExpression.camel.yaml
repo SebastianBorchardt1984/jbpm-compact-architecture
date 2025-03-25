@@ -1,0 +1,61 @@
+- route:
+    id: check-insurance-route
+    from:
+      id: from-test2
+      uri: rest
+      parameters:
+        consumes: application/json
+        method: post
+        path: /api/checkoffeneVzei
+      steps:
+        - unmarshal:
+            id: unmarshal-json3
+            json:
+              id: json-c74d
+              library: Jackson
+        - setProperty:
+            id: propOpenInsuranceIds
+            expression:
+              java:
+                expression: >-
+                  import java.util.ArrayList; 
+
+                  import java.util.List; 
+
+                  import.java.util.Map;
+
+                                                      Map bodyMap = exchange.getMessage().getBody(Map.class); if
+                                                      (bodyMap == null) {
+                                                        return null;
+                                                      } Object zeitenObj = bodyMap.get("versicherungZeiten"); if
+                                                      (!(zeitenObj instanceof List)) {
+                                                        return null;
+                                                      } List<Map<String, Object>> versicherungsZeiten =
+                                                      (List<Map<String, Object>>) zeitenObj; List<String> openIds =
+                                                      new ArrayList<>(); for (Map<String, Object> item :
+                                                      versicherungsZeiten) {
+                                                        if ("99991231".equals(item.get("Ende"))) {
+                                                          openIds.add((String) item.get("ID"));
+                                                        }
+                                                      } return openIds;
+            name: openInsuranceIds
+        - choice:
+            id: choice-open-ids
+            otherwise:
+              id: otherwise-9719
+              steps:
+                - log:
+                    id: log-no-open-insurance
+                    message: keine offene Versicherungszeit
+            when:
+              - id: when-0aa8
+                steps:
+                  - log:
+                      id: log-open-ids
+                      message: "Versicherungszeiten mit Ende=99991231:
+                        ${exchangeProperty.openInsuranceIds}"
+                expression:
+                  simple:
+                    id: simple-19a1
+                    expression: ${exchangeProperty.openInsuranceIds} != null &&
+                      ${exchangeProperty.openInsuranceIds.size()} > 0

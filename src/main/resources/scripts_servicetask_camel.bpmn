@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_q6aSkOrpED22Df6wp2yLyQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_nameItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_messageItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__D02D169A-0CF1-4276-93FC-96FD33057A83_eventOutputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="myMessageType" structureRef="String"/>
+  <bpmn2:itemDefinition id="_82B896C6-B0E2-485C-A4FC-7BD0CD623D42" structureRef=""/>
+  <bpmn2:itemDefinition id="_557BCEB4-F277-4CB5-9D73-65038A479EC8" structureRef=""/>
+  <bpmn2:itemDefinition id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_InMessageType"/>
+  <bpmn2:itemDefinition id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_OutMessageType"/>
+  <bpmn2:itemDefinition id="__CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputXItem" structureRef="String"/>
+  <bpmn2:message id="_q6fLEOrpED22Df6wp2yLyQ" itemRef="myMessageType" name="myMessage"/>
+  <bpmn2:message id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_InMessage" itemRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_InMessageType"/>
+  <bpmn2:message id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_OutMessage" itemRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_OutMessageType"/>
+  <bpmn2:interface id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_ServiceInterface" name="org.kie.kogito.hr.CallCamelBean" implementationRef="org.kie.kogito.hr.CallCamelBean">
+    <bpmn2:operation id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_ServiceOperation" name="callCamelRoute" implementationRef="callCamelRoute">
+      <bpmn2:inMessageRef>_CB691249-C8F9-415A-85C5-1F08A5BDDE04_InMessage</bpmn2:inMessageRef>
+      <bpmn2:outMessageRef>_CB691249-C8F9-415A-85C5-1F08A5BDDE04_OutMessage</bpmn2:outMessageRef>
+    </bpmn2:operation>
+  </bpmn2:interface>
+  <bpmn2:collaboration id="_1B5F8B50-6CB8-4FF5-A8EA-82BB08EB2C2C" name="Default Collaboration">
+    <bpmn2:participant id="_DDAB1C23-A276-4ADF-87FA-16C5C2991AB9" name="Pool Participant" processRef="scripts_camel"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="scripts_camel" drools:packageName="org.kie.kogito.hr" drools:version="1.0" drools:adHoc="false" name="scripts_camel" isExecutable="true" processType="Public">
+    <bpmn2:property id="name" itemSubjectRef="_nameItem" name="name"/>
+    <bpmn2:property id="message" itemSubjectRef="_messageItem" name="message"/>
+    <bpmn2:sequenceFlow id="_B320FDF9-4EFA-4BB7-B7C5-FC46A198FA61" sourceRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04" targetRef="_CFA059DC-2FC1-4151-A3EC-990F0B4E3236">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_80DA9F1E-743F-4BAF-BFF3-67DDC905E3B7" sourceRef="_D02D169A-0CF1-4276-93FC-96FD33057A83" targetRef="_8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_FEBCC225-139C-47B0-BA16-7878EEE3532D" sourceRef="_E96920FB-69BF-4C28-9F65-FC3EFAF29AD9" targetRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_B4A85C14-EA42-43CA-9BA2-CB92E32FACF5" sourceRef="_8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC" targetRef="_E96920FB-69BF-4C28-9F65-FC3EFAF29AD9">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:serviceTask id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04" drools:serviceimplementation="Java" drools:serviceinterface="org.kie.kogito.hr.CallCamelBean" drools:serviceoperation="callCamelRoute" name="Camel Route aufruf" implementation="Java" operationRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_ServiceOperation">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Camel Route aufruf]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_FEBCC225-139C-47B0-BA16-7878EEE3532D</bpmn2:incoming>
+      <bpmn2:outgoing>_B320FDF9-4EFA-4BB7-B7C5-FC46A198FA61</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputX" drools:dtype="String" itemSubjectRef="__CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputXItem" name="payload"/>
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:targetRef>_CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputX</bpmn2:targetRef>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[ich komme aus kogito]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_CB691249-C8F9-415A-85C5-1F08A5BDDE04_payloadInputX]]></bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:serviceTask>
+    <bpmn2:endEvent id="_CFA059DC-2FC1-4151-A3EC-990F0B4E3236" name="End Process">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[End Process]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_B320FDF9-4EFA-4BB7-B7C5-FC46A198FA61</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:startEvent id="_D02D169A-0CF1-4276-93FC-96FD33057A83" name="StartProcess">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[StartProcess]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>_80DA9F1E-743F-4BAF-BFF3-67DDC905E3B7</bpmn2:outgoing>
+      <bpmn2:dataOutput id="_D02D169A-0CF1-4276-93FC-96FD33057A83_eventOutputX" drools:dtype="String" itemSubjectRef="__D02D169A-0CF1-4276-93FC-96FD33057A83_eventOutputXItem" name="event"/>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_D02D169A-0CF1-4276-93FC-96FD33057A83_eventOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet>
+        <bpmn2:dataOutputRefs>_D02D169A-0CF1-4276-93FC-96FD33057A83_eventOutputX</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:messageEventDefinition drools:msgref="myMessage" messageRef="_q6fLEOrpED22Df6wp2yLyQ"/>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="_8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC" name="Say Hello" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Say Hello]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_80DA9F1E-743F-4BAF-BFF3-67DDC905E3B7</bpmn2:incoming>
+      <bpmn2:outgoing>_B4A85C14-EA42-43CA-9BA2-CB92E32FACF5</bpmn2:outgoing>
+      <bpmn2:script>System.out.println("Hello " + name);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:scriptTask id="_E96920FB-69BF-4C28-9F65-FC3EFAF29AD9" name="Update Message" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Update Message]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_B4A85C14-EA42-43CA-9BA2-CB92E32FACF5</bpmn2:incoming>
+      <bpmn2:outgoing>_FEBCC225-139C-47B0-BA16-7878EEE3532D</bpmn2:outgoing>
+      <bpmn2:script>kcontext.setVariable("message", "Hello " + name);</bpmn2:script>
+    </bpmn2:scriptTask>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="scripts_camel">
+      <bpmndi:BPMNShape id="shape__E96920FB-69BF-4C28-9F65-FC3EFAF29AD9" bpmnElement="_E96920FB-69BF-4C28-9F65-FC3EFAF29AD9">
+        <dc:Bounds height="102" width="154" x="616" y="141"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC" bpmnElement="_8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC">
+        <dc:Bounds height="102" width="154" x="387" y="141"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__D02D169A-0CF1-4276-93FC-96FD33057A83" bpmnElement="_D02D169A-0CF1-4276-93FC-96FD33057A83">
+        <dc:Bounds height="56" width="56" x="242" y="164"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__CFA059DC-2FC1-4151-A3EC-990F0B4E3236" bpmnElement="_CFA059DC-2FC1-4151-A3EC-990F0B4E3236">
+        <dc:Bounds height="56" width="56" x="1108" y="164"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__CB691249-C8F9-415A-85C5-1F08A5BDDE04" bpmnElement="_CB691249-C8F9-415A-85C5-1F08A5BDDE04">
+        <dc:Bounds height="102" width="154" x="862" y="141"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC_to_shape__E96920FB-69BF-4C28-9F65-FC3EFAF29AD9" bpmnElement="_B4A85C14-EA42-43CA-9BA2-CB92E32FACF5">
+        <di:waypoint x="541" y="192"/>
+        <di:waypoint x="616" y="192"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__E96920FB-69BF-4C28-9F65-FC3EFAF29AD9_to_shape__CB691249-C8F9-415A-85C5-1F08A5BDDE04" bpmnElement="_FEBCC225-139C-47B0-BA16-7878EEE3532D">
+        <di:waypoint x="770" y="192"/>
+        <di:waypoint x="811" y="191.8971042837569"/>
+        <di:waypoint x="939" y="192"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__D02D169A-0CF1-4276-93FC-96FD33057A83_to_shape__8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC" bpmnElement="_80DA9F1E-743F-4BAF-BFF3-67DDC905E3B7">
+        <di:waypoint x="298" y="192"/>
+        <di:waypoint x="387" y="192"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__CB691249-C8F9-415A-85C5-1F08A5BDDE04_to_shape__CFA059DC-2FC1-4151-A3EC-990F0B4E3236" bpmnElement="_B320FDF9-4EFA-4BB7-B7C5-FC46A198FA61">
+        <di:waypoint x="939" y="192"/>
+        <di:waypoint x="1108" y="192"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="_E96920FB-69BF-4C28-9F65-FC3EFAF29AD9">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_8E2E0452-86B3-4B86-B8A1-CE3B78B0B2EC">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_CB691249-C8F9-415A-85C5-1F08A5BDDE04">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_q6aSkOrpED22Df6wp2yLyQ</bpmn2:source>
+    <bpmn2:target>_q6aSkOrpED22Df6wp2yLyQ</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
